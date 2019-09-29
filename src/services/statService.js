@@ -14,9 +14,7 @@ export function create_lookup() {
 }
 
 export function getStats(season) {
-  console.log(season)
   season = undefined ? "2008" : season
-  return http.get(statApiEndpoint, {
-    params: {season}
-  });
+  const apiUrl = statApiEndpoint + "?season=" + season
+  return http.get(apiUrl);
 }
