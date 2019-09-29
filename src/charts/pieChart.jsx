@@ -10,13 +10,12 @@ class PieChartContainer extends Component {
   };
 
   render() {
-    console.log(this.props)
     const Chartata = this.props.data
 
     return (
       <PieChart
         data={Chartata}
-        width={700}
+        width={610}
         height={400}
         margin={{top: 10, bottom: 10, left: 100, right: 100}}
         tooltipOffset={{top: 175, left: 200}}

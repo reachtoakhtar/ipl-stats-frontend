@@ -40,8 +40,10 @@ class App extends Component {
     const data = this.state.data
     let winners = []
     let toss_winners = {}
+    let batting_percentage = {}
 
     if (data) {
+      console.log(data)
       winners = [{
         label: "Top Winners",
         values: data.winners.slice(0, 4)
@@ -49,9 +51,13 @@ class App extends Component {
 
       toss_winners = {
         label: "Top Toss Winners",
-        values: data.toss_winners.slice(0, 4)
+        values: data.toss_winners
       }
 
+      batting_percentage = {
+        label: "Batting percentage",
+        values: data.toss_winners_decision
+      }
     }
 
     return (
@@ -61,7 +67,10 @@ class App extends Component {
           <div className="header">
             <div><b>IPL Stats</b></div>
             <div>
-              <span style={{fontSize: "18px", color: "grey"}}>Select Season &nbsp;</span>
+              <span style={{
+                fontSize: "18px",
+                color: "grey"
+              }}>Select Season &nbsp;</span>
               <Select value={selectedOption} onChange={this.handleChange}>
                 <MenuItem value={2008}>2008</MenuItem>
                 <MenuItem value={2009}>2009</MenuItem>
@@ -81,7 +90,7 @@ class App extends Component {
         <main className="container">
           <div className="chartArea">
             <h4>Top Match Winners</h4>
-            <BarChartContainer data={winners} />
+            <BarChartContainer data={winners}/>
           </div>
 
           <div className="chartArea">
@@ -89,16 +98,66 @@ class App extends Component {
             <PieChartContainer data={toss_winners}/>
           </div>
 
-          {/*<div className="chartArea">*/}
-          {/*  <table>*/}
-          {/*    <tr>*/}
-          {/*      <td>Max palyer of the match award in the season</td>*/}
-          {/*      <td>{players_of_match}</td>*/}
-          {/*    </tr>*/}
-          {/*  </table>*/}
-          {/*  <label>Top Toss Winners</label>: <span>{}</span>*/}
-          {/*</div>*/}
+          <div className="chartArea">
+            <h4>Batting percentage after toss win</h4>
+            <PieChartContainer data={batting_percentage}/>
+          </div>
 
+          <div className="chartArea">
+            <table>
+              <tbody>
+              <tr>
+                <td>Team won by highest no of wickets</td>
+                <td>{data.wicket_winners[0].winner}</td>
+              </tr>
+
+              <tr>
+                <td>Most toss winning team</td>
+                <td>{data.toss_winners[0].x}</td>
+              </tr>
+
+              {/*<tr>*/}
+              {/*  <td>Percentage of teams decided to bat after winning toss</td>*/}
+              {/*  <td>{data.toss_winners_decision[0].percentage_bat}</td>*/}
+              {/*</tr>*/}
+
+              <tr>
+                <td>Team with most toss and match winner</td>
+                <td>{data.toss_and_match_winners[0].x}</td>
+              </tr>
+
+              <tr>
+                <td>Most match winning team</td>
+                <td>{data.winners[0].x}</td>
+              </tr>
+
+              <tr>
+                <td>Highest margin winner team</td>
+                <td>{data.run_winners[0].winner}</td>
+              </tr>
+
+              <tr>
+                <td>Player with most man of the match</td>
+                <td>{data.players_of_match[0].player_of_match}</td>
+              </tr>
+
+              <tr>
+                <td>Location with most win for top team</td>
+                <td>{data.most_win_location[0].city}</td>
+              </tr>
+
+              <tr>
+                <td>Most run giving bowler</td>
+                <td>{data.most_runs_given[0].bowler}</td>
+              </tr>
+
+              <tr>
+                <td>Most catches taken</td>
+                <td>{data.most_catches_taken[0].fielder}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </main>
         }
       </React.Fragment>
