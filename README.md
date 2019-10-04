@@ -10,6 +10,7 @@
 1. Clone this repository and cd to the directory containing package.json file.
 
 2. Install dependencies:
+
     $ `npm i`
     
     $ `npm i -g serve`
